@@ -83,7 +83,7 @@ client.addListener('message', function(from, to, text) {
     text = "import std.stdio, std.file, std.bigint, std.format, std.container, std.typecons, std.parallelism, std.array, std.random, std.math, std.algorithm, std.conv, std.string, std.functional; void main() { " +  text.substring(7) + " } ";
     try {
       out = "";
-      file = mktemp.createFileSync("/tmp/script-XXXX.d");
+      file = mktemp.createFileSync("/tmp/scriptXXXX.d");
       fs.writeFileSync(file, text);
 
       child = cp.execFile("rdmd", [file], function(err, stdout, stderr) {
