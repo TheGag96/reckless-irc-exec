@@ -80,8 +80,7 @@ client.addListener('message', function(from, to, text) {
       setTimeout(function(){ child.kill(); }, 10000);
     } catch(ex) { console.log(ex); }
   } else if(/^\!deval /.test(text)) {
-    text = "import std.stdio, std.file, std.bigint, std.format, std.container, std.typecons, std.parallelism, std.array, std.random, std.math, std.algorithm, std.conv, std.string, std.functional; void main() { " +
-      +  text.substring(7) + " } ";
+    text = "import std.stdio, std.file, std.bigint, std.format, std.container, std.typecons, std.parallelism, std.array, std.random, std.math, std.algorithm, std.conv, std.string, std.functional; void main() { " +  text.substring(7) + " } ";
     try {
       out = "";
       file = mktemp.createFileSync("/tmp/script-XXXX.d");
