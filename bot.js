@@ -79,6 +79,20 @@ client.addListener('message', function(from, to, text) {
 
       setTimeout(function(){ child.kill(); }, 10000);
     } catch(ex) { console.log(ex); }
+  } else if(/^\!deval /.test(text)) {
+    text = "import std.stdio, std.file, std.bigint, std.format, std.container, std.typecons, std.parallelism, std.array, std.random, std.math, std.algorithm, std.conv, std.string, std.functional; void main() { " +
+      +  text.substring(7) + " } ";
+    try {
+      out = "";
+      file = mktemp.createFileSync("/tmp/script-XXXX.d");
+      fs.writeFileSync(file, text);
+
+      child = cp.execFile("rdmd", [file], function(err, stdout, stderr) {
+        sendOutput(to, from, stdout, stderr);
+      });
+
+      setTimeout(function(){ child.kill(); }, 10000);
+    } catch(ex) { console.log(ex); }
   } else if(/^\!(date|ddate|ls|cat|ruby|python|bash)/.test(text)) {
     text = text.substring(1);
     try {
